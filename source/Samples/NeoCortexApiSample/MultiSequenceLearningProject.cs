@@ -22,8 +22,7 @@ namespace MultiSequencePrediction
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
             /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
             //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
-            string seqPath = @"..\..\..\..\..\MySEProject/trainingSequences.txt";
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), seqPath));
+            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
             sequences = readSequences(sequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             Dictionary<string, object>  encoderSettings = new Dictionary<string, object>()
@@ -37,7 +36,7 @@ namespace MultiSequencePrediction
                 { "ClipInput", false},
                 { "MaxVal", 99}
             };
-            var predictor = newExperiment.Run(sequences);
+            var predictor = newExperiment.Run(sequences, encoderSettings);
             return predictor;
         }
         public Dictionary<string, List<double>> readSequences(string sequencePath)

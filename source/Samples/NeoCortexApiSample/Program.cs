@@ -93,12 +93,11 @@ namespace NeoCortexApiSample
 
         /// <summary>
         /* This is the method which will contain the implementation by our team for the Project*/
-        /* Here the sequences are stored in the file and taking sequences from the file*/
+        /* Team_Matrix*/
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment()
         {
-            string tpaths = @"..\..\..\..\..\MySEProject/testingData.txt";
-            string testDataPath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), tpaths));
+            string testDataPath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
             Project project = new Project();
             List<List<double>> testSequences;
             testSequences = project.readTestSequences(testDataPath);
