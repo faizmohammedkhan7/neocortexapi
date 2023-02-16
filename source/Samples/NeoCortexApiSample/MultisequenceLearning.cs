@@ -246,7 +246,7 @@ namespace NeoCortexApiSample
                             Debug.WriteLine($"Match. Actual value: {key} - Predicted value: {lastPredictedValues.FirstOrDefault(key)}.");
                         }
                         else
-                            Debug.WriteLine($"Missmatch! Actual value: {key} - Predicted values: {String.Join(',', lastPredictedValues)}");
+                            Debug.WriteLine($"Missmatch! Actual value: {key} - Predicted values: {string.Join(',', lastPredictedValues)}");
 
                         if (lyrOut.PredictiveCells.Count > 0)
                         {
