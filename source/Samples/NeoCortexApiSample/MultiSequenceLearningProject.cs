@@ -25,6 +25,7 @@ namespace MultiSequencePrediction
             string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
             sequences = readSequences(sequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
+            /*Defining the encoder settings for the experiment*/
             Dictionary<string, object>  encoderSettings = new Dictionary<string, object>()
             {
                 { "W", 15},
@@ -39,6 +40,8 @@ namespace MultiSequencePrediction
             var predictor = newExperiment.Run(sequences, encoderSettings);
             return predictor;
         }
+
+        /*This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.*/
         public Dictionary<string, List<double>> readSequences(string sequencePath)
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
@@ -65,6 +68,7 @@ namespace MultiSequencePrediction
                 return sequences;
             }
         }
+        /*This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.*/
         public List<List<double>> readTestSequences(string path)
         {
             var testSequences = new List<List<double>>();
