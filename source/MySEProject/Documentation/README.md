@@ -17,5 +17,9 @@ Added new method for testing sequence : RunMultiSequenceLearningExperiment()
 //Implemented Code for reading the learning sequences and testing sequences from .txt file the code is implemented in RunPredictionMultiSequenceExperiment() method.
 
 * And the Sequences are in source\MySEProject as trainingSequences.txt & testingData.txt
+
+*RunPredictionMultiSequenceExperiment() method is called from the program.cs.
+
+The method has an instantiated object project of type Project which is a class implemented in MultiSequencePrediction.
                                         
                                          
