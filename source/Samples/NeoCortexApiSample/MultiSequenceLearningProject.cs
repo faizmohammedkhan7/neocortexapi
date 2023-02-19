@@ -22,39 +22,26 @@ namespace MultiSequencePrediction
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
             /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
             //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
-            string seqPath = @"..\..\..\..\..\MySEProject/trainingSequences.txt";
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), seqPath));
+            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
             sequences = readSequences(sequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-            var predictor = newExperiment.Run(sequences);
-
-            //Testing sequences
-            string tpaths = @"..\..\..\..\..\MySEProject/testingData.txt";
-            string testDataPath = File.ReadAllText(Path.Combine(System.IO.Directory.GetCurrent‌​Directory(), tpaths));
-            var testSequences = new List<List<double>>();
-            var testList = new List<double>();
-
-
-            using (var reader = new StreamReader(testDataPath))
+            /*Defining the encoder settings for the experiment*/
+            Dictionary<string, object>  encoderSettings = new Dictionary<string, object>()
             {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
-                    Console.WriteLine(line);
-
-                    foreach (var value in values)
-                    {
-                        testList.Add(Convert.ToDouble(value));
-                    }
-                    testSequences.Add(testList);
-                }
-            }
-
-
-
-            return (null);
+                { "W", 15},
+                { "N", 100},
+                { "Radius", -1.0},
+                { "MinVal", 0.0},
+                { "Periodic", false},
+                { "Name", "scalar"},
+                { "ClipInput", false},
+                { "MaxVal", 99}
+            };
+            var predictor = newExperiment.Run(sequences, encoderSettings);
+            return predictor;
         }
+
+        /*This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.*/
         public Dictionary<string, List<double>> readSequences(string sequencePath)
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
@@ -80,6 +67,30 @@ namespace MultiSequencePrediction
                 }
                 return sequences;
             }
+        }
+        /*This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.*/
+        public List<List<double>> readTestSequences(string path)
+        {
+            var testSequences = new List<List<double>>();
+            var testList = new List<double>();
+
+
+            using (var reader = new StreamReader(path))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+                    Console.WriteLine(line);
+
+                    foreach (var value in values)
+                    {
+                        testList.Add(Convert.ToDouble(value));
+                    }
+                    testSequences.Add(testList);
+                }
+            }
+            return testSequences;
         }
     }
 }
