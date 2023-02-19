@@ -98,10 +98,12 @@ namespace NeoCortexApiSample
         private static void RunPredictionMultiSequenceExperiment()
         {
             string testDataPath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
+            /*Instantiating project class from MultiSequencePrediction*/
             Project project = new Project();
             List<List<double>> testSequences;
+            /*Code for reading the testing sequences from .txt file.*/
             testSequences = project.readTestSequences(testDataPath);
-
+            /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)
             {
