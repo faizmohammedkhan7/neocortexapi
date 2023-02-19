@@ -18,8 +18,14 @@ Added new method for testing sequence : RunMultiSequenceLearningExperiment()
 
 * And the Sequences are in source\MySEProject as trainingSequences.txt & testingData.txt
 
-*RunPredictionMultiSequenceExperiment() method is called from the program.cs.
+**RunPredictionMultiSequenceExperiment() method is called from the program.cs.
 
 The method has an instantiated object project of type Project which is a class implemented in MultiSequencePrediction.
+
+**The methods for reading test sequences and learning sequences are defined in MultiSequenceLearningProject.cs in the Project class.
+
+The PredictionExperiment() method calls the Run() method from the MultiSequenceLearning class.
+
+The Run() method takes in seqences and the encoderSettings as arguements.
                                         
                                          
