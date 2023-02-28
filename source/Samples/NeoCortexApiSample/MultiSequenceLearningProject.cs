@@ -18,15 +18,9 @@ namespace MultiSequencePrediction
     class Project
     {
         private Dictionary<string, object> _encoderSettings;
-        /*public void setEncoderSettings(Dictionary<string, object> encoderSetting)
-        {
-            encoderSettings = encoderSetting;
-        }
-        public Dictionary<string, object> getEncoderSettings()
-        {
-            return encoderSettings;
-        }*/
+        private String _trainSequencePath;
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
+        public String TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
