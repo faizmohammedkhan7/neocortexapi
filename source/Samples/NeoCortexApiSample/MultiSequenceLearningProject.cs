@@ -19,16 +19,18 @@ namespace MultiSequencePrediction
     {
         private Dictionary<string, object> _encoderSettings;
         private String _trainSequencePath;
+        private String _testSequencePath;
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public String TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
+        public String TestSequencePath { get { return _testSequencePath; } set { _testSequencePath = value; } }
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
             /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
-            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
-            sequences = readSequences(sequencePath);
+            
+            sequences = readSequences(_trainSequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
+
             /*Defining the encoder settings for the experiment*/
             
             var predictor = newExperiment.Run(sequences, _encoderSettings);
