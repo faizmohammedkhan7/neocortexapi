@@ -17,6 +17,10 @@ namespace MultiSequencePrediction
 {
     class Project
     {
+        private Dictionary<string, object> _encoderSettings;
+        private String _trainSequencePath;
+        public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
+        public String TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
@@ -26,18 +30,8 @@ namespace MultiSequencePrediction
             sequences = readSequences(sequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             /*Defining the encoder settings for the experiment*/
-            Dictionary<string, object>  encoderSettings = new Dictionary<string, object>()
-            {
-                { "W", 15},
-                { "N", 100},
-                { "Radius", -1.0},
-                { "MinVal", 0.0},
-                { "Periodic", false},
-                { "Name", "scalar"},
-                { "ClipInput", false},
-                { "MaxVal", 99}
-            };
-            var predictor = newExperiment.Run(sequences, encoderSettings);
+            
+            var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
 

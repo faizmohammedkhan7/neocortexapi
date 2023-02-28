@@ -104,13 +104,25 @@ namespace NeoCortexApiSample
             /*Code for reading the testing sequences from .txt file.*/
             testSequences = project.readTestSequences(testDataPath);
             /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
+            Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
+            {
+                { "W", 15},
+                { "N", 100},
+                { "Radius", -1.0},
+                { "MinVal", 0.0},
+                { "Periodic", false},
+                { "Name", "scalar"},
+                { "ClipInput", false},
+                { "MaxVal", 99.0}
+            };
+            project.EncoderSettings=encoderSettings;
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)
             {
                 predictor.Reset();
                 PredictNextElement(predictor, testSequences[i]);
             }
-
+            
             
         }
 
