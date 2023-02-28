@@ -101,6 +101,8 @@ namespace NeoCortexApiSample
             /*Instantiating project class from MultiSequencePrediction*/
             Project project = new Project();
             List<List<double>> testSequences;
+            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
+            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
             /*Code for reading the testing sequences from .txt file.*/
             testSequences = project.readTestSequences(testDataPath);
             /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
@@ -115,6 +117,7 @@ namespace NeoCortexApiSample
                 { "ClipInput", false},
                 { "MaxVal", 99.0}
             };
+            project.TrainSequencePath = sequencePath;
             project.EncoderSettings=encoderSettings;
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)

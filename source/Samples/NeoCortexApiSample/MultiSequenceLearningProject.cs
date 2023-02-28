@@ -25,9 +25,8 @@ namespace MultiSequencePrediction
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
             /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
-            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
-            sequences = readSequences(sequencePath);
+            
+            sequences = readSequences(_trainSequencePath);
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             /*Defining the encoder settings for the experiment*/
             
