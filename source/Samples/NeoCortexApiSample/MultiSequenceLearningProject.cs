@@ -26,12 +26,11 @@ namespace MultiSequencePrediction
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
-            /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
-            
-            sequences = readSequences(_trainSequencePath);
-            MultiSequenceLearning newExperiment = new MultiSequenceLearning();
 
-            /*Defining the encoder settings for the experiment*/
+            /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
+            sequences = readSequences(_trainSequencePath);
+
+            MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             
             var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
