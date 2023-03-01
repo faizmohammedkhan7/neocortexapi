@@ -97,14 +97,15 @@ namespace NeoCortexApiSample
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment()
         {
-            string testDataPath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
-            /*Instantiating project class from MultiSequencePrediction*/
-            Project project = new Project();
-            List<List<double>> testSequences;
             //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
             string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
+
+            string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
+            /*Instantiating project class from MultiSequencePrediction*/
+            Project project = new Project();
+
             /*Code for reading the testing sequences from .txt file.*/
-            testSequences = project.readTestSequences(testDataPath);
+            List<List<double>> testSequences = project.readTestSequences(testSequencePath);
 
             /*Defining the encoder settings for the experiment*/
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
@@ -120,7 +121,6 @@ namespace NeoCortexApiSample
             };
             project.TrainSequencePath = sequencePath;
             project.EncoderSettings = encoderSettings;
-            project.TestSequencePath = testDataPath;
 
             /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
             Predictor predictor = project.PredictionExperiment();

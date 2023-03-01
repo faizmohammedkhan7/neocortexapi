@@ -18,11 +18,11 @@ namespace MultiSequencePrediction
     class Project
     {
         private Dictionary<string, object> _encoderSettings;
-        private String _trainSequencePath;
-        private String _testSequencePath;
+        private string _trainSequencePath;
+        private string _testSequencePath;
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
-        public String TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
-        public String TestSequencePath { get { return _testSequencePath; } set { _testSequencePath = value; } }
+        public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
+
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
@@ -63,6 +63,7 @@ namespace MultiSequencePrediction
                 return sequences;
             }
         }
+
         /*This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.*/
         public List<List<double>> readTestSequences(string path)
         {
