@@ -105,7 +105,8 @@ namespace NeoCortexApiSample
             string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
             /*Code for reading the testing sequences from .txt file.*/
             testSequences = project.readTestSequences(testDataPath);
-            /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
+
+            /*Defining the encoder settings for the experiment*/
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
             {
                 { "W", 15},
@@ -118,7 +119,10 @@ namespace NeoCortexApiSample
                 { "MaxVal", 99.0}
             };
             project.TrainSequencePath = sequencePath;
-            project.EncoderSettings=encoderSettings;
+            project.EncoderSettings = encoderSettings;
+            project.TestSequencePath = testDataPath;
+
+            /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)
             {
