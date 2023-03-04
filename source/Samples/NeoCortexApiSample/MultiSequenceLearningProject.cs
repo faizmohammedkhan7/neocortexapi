@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using NeoCortexApi;
@@ -19,7 +16,6 @@ namespace MultiSequencePrediction
     {
         private Dictionary<string, object> _encoderSettings;
         private string _trainSequencePath;
-        private string _testSequencePath;
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
 
@@ -43,22 +39,19 @@ namespace MultiSequencePrediction
             var sequence = new List<double>();
             using (StreamReader reader = new(sequencePath))
             {
-                int count = 1;
+                int count = 1; //Defining the count for sequence Numbering
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    Console.WriteLine(line);
 
                     foreach (var value in values)
                     {
-                        // sequence.Add(Convert.ToDouble(value));
-                        sequence.Add(double.Parse(value));
+                        sequence.Add(Convert.ToDouble(value));            
                     }
                     string seqName = "seq" + count;
                     sequences.Add(seqName, sequence);
                     count++;
-
                 }
                 return sequences;
             }
@@ -69,15 +62,12 @@ namespace MultiSequencePrediction
         {
             var testSequences = new List<List<double>>();
             var testList = new List<double>();
-
-
             using (var reader = new StreamReader(path))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    Console.WriteLine(line);
 
                     foreach (var value in values)
                     {
