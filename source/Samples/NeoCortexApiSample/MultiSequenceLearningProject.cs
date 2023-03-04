@@ -16,6 +16,7 @@ namespace MultiSequencePrediction
     {
         private Dictionary<string, object> _encoderSettings;
         private string _trainSequencePath;
+        // Getters/ Setters for above instance variables.
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
 
@@ -42,16 +43,26 @@ namespace MultiSequencePrediction
                 int count = 1; //Defining the count for sequence Numbering
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
-
-                    foreach (var value in values)
+                    try
                     {
-                        sequence.Add(Convert.ToDouble(value));            
+                        var line = reader.ReadLine();
+                        var values = line.Split(',', ' ');
+                        foreach (var value in values)
+                        {
+                            sequence.Add(Convert.ToDouble(value));
+                        }
+                        string seqName = "seq" + count;
+                        sequences.Add(seqName, sequence);
+                        count++;
+                        
                     }
-                    string seqName = "seq" + count;
-                    sequences.Add(seqName, sequence);
-                    count++;
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("Error reading file: " + e.Message);
+                        
+                    }
+                    
+
                 }
                 return sequences;
             }
@@ -67,7 +78,7 @@ namespace MultiSequencePrediction
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var values = line.Split(',');
+                    var values = line.Split(',', ' ');
 
                     foreach (var value in values)
                     {
