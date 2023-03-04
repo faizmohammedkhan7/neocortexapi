@@ -17,27 +17,22 @@ namespace MultiSequencePrediction
 {
     class Project
     {
+        private Dictionary<string, object> _encoderSettings;
+        private string _trainSequencePath;
+        private string _testSequencePath;
+        public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
+        public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
+
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
+
             /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
-            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
-            sequences = readSequences(sequencePath);
+            sequences = readSequences(_trainSequencePath);
+
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-            /*Defining the encoder settings for the experiment*/
-            Dictionary<string, object>  encoderSettings = new Dictionary<string, object>()
-            {
-                { "W", 15},
-                { "N", 100},
-                { "Radius", -1.0},
-                { "MinVal", 0.0},
-                { "Periodic", false},
-                { "Name", "scalar"},
-                { "ClipInput", false},
-                { "MaxVal", 99}
-            };
-            var predictor = newExperiment.Run(sequences, encoderSettings);
+            
+            var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
 
@@ -68,6 +63,7 @@ namespace MultiSequencePrediction
                 return sequences;
             }
         }
+
         /*This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.*/
         public List<List<double>> readTestSequences(string path)
         {

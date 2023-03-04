@@ -97,12 +97,31 @@ namespace NeoCortexApiSample
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment()
         {
-            string testDataPath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
+            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
+            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
+
+            string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
             /*Instantiating project class from MultiSequencePrediction*/
             Project project = new Project();
-            List<List<double>> testSequences;
+
             /*Code for reading the testing sequences from .txt file.*/
-            testSequences = project.readTestSequences(testDataPath);
+            List<List<double>> testSequences = project.readTestSequences(testSequencePath);
+
+            /*Defining the encoder settings for the experiment*/
+            Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
+            {
+                { "W", 15},
+                { "N", 100},
+                { "Radius", -1.0},
+                { "MinVal", 0.0},
+                { "Periodic", false},
+                { "Name", "scalar"},
+                { "ClipInput", false},
+                { "MaxVal", 99.0}
+            };
+            project.TrainSequencePath = sequencePath;
+            project.EncoderSettings = encoderSettings;
+
             /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)
@@ -110,7 +129,7 @@ namespace NeoCortexApiSample
                 predictor.Reset();
                 PredictNextElement(predictor, testSequences[i]);
             }
-
+            
             
         }
 
