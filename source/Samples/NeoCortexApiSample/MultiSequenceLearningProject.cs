@@ -47,17 +47,14 @@ namespace MultiSequencePrediction
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    Console.WriteLine(line);
 
                     foreach (var value in values)
                     {
-                        sequence.Add(Convert.ToDouble(value));
-                     
+                        sequence.Add(Convert.ToDouble(value));            
                     }
                     string seqName = "seq" + count;
                     sequences.Add(seqName, sequence);
                     count++;
-
                 }
                 return sequences;
             }
@@ -68,15 +65,12 @@ namespace MultiSequencePrediction
         {
             var testSequences = new List<List<double>>();
             var testList = new List<double>();
-
-
             using (var reader = new StreamReader(path))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    Console.WriteLine(line);
 
                     foreach (var value in values)
                     {
