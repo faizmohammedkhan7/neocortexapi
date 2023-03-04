@@ -77,14 +77,21 @@ namespace MultiSequencePrediction
             {
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',', ' ');
-
-                    foreach (var value in values)
+                    try
                     {
-                        testList.Add(Convert.ToDouble(value));
+                        var line = reader.ReadLine();
+                        var values = line.Split(',', ' ');
+
+                        foreach (var value in values)
+                        {
+                            testList.Add(Convert.ToDouble(value));
+                        }
+                        testSequences.Add(testList);
                     }
-                    testSequences.Add(testList);
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("Error reading test file: " + e.Message);
+                    }
                 }
             }
             return testSequences;
