@@ -19,7 +19,6 @@ namespace MultiSequencePrediction
     {
         private Dictionary<string, object> _encoderSettings;
         private string _trainSequencePath;
-        private string _testSequencePath;
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
 
@@ -52,8 +51,8 @@ namespace MultiSequencePrediction
 
                     foreach (var value in values)
                     {
-                        // sequence.Add(Convert.ToDouble(value));
-                        sequence.Add(double.Parse(value));
+                        sequence.Add(Convert.ToDouble(value));
+                     
                     }
                     string seqName = "seq" + count;
                     sequences.Add(seqName, sequence);
