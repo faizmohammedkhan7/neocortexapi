@@ -117,7 +117,7 @@ namespace NeoCortexApiSample
                 { "Periodic", false},
                 { "Name", "scalar"},
                 { "ClipInput", false},
-                { "MaxVal", 99.0}
+                { "MaxVal", 99.0} //Only double value
             };
             project.TrainSequencePath = sequencePath;
             project.EncoderSettings = encoderSettings;
@@ -128,9 +128,7 @@ namespace NeoCortexApiSample
             {
                 predictor.Reset();
                 PredictNextElement(predictor, testSequences[i]);
-            }
-            
-            
+            }  
         }
 
 

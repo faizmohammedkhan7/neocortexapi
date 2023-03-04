@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using NeoCortexApi;
@@ -42,7 +39,7 @@ namespace MultiSequencePrediction
             var sequence = new List<double>();
             using (StreamReader reader = new(sequencePath))
             {
-                int count = 1;
+                int count = 1; //Defining the count for sequence Numbering
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
