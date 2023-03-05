@@ -27,5 +27,9 @@ The method has an instantiated object project of type Project which is a class i
 The PredictionExperiment() method calls the Run() method from the MultiSequenceLearning class.
 
 The Run() method takes in seqences and the encoderSettings as arguements.
+
+** Executed few lines of code which helps to run the program successfully.
+
+** Started Preparing Power Point Presentation , Prepared Few Slides.
                                         
                                          
