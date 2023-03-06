@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using static NeoCortexApiSample.MultiSequenceLearning;
 using MultiSequencePrediction;
+using System.ComponentModel;
 
 namespace NeoCortexApiSample
 {
@@ -92,22 +93,22 @@ namespace NeoCortexApiSample
         }
 
         /// <summary>
-        /* This is the method which will contain the implementation by our team for the Project*/
-        /* Team_Matrix*/
+        /// This is the method which will contain the implementation by our team for the Project
+        /// Team_Matrix
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment()
         {
-            //string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
+            // string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
             string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
 
             string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
-            /*Instantiating project class from MultiSequencePrediction*/
+            // Instantiating project class from MultiSequencePrediction
             Project project = new Project();
 
-            /*Code for reading the testing sequences from .txt file.*/
+            // Code for reading the testing sequences from .txt file.
             List<List<double>> testSequences = project.readTestSequences(testSequencePath);
 
-            /*Defining the encoder settings for the experiment*/
+            // Defining the encoder settings for the experiment
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
             {
                 { "W", 15},
@@ -122,7 +123,7 @@ namespace NeoCortexApiSample
             project.TrainSequencePath = sequencePath;
             project.EncoderSettings = encoderSettings;
 
-            /*Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file*/
+            // Getting the Predictor Object feeding into prediction next element for every sequence in the test sequence file
             Predictor predictor = project.PredictionExperiment();
             for (int i = 0; i< testSequences.Count; i++)
             {
