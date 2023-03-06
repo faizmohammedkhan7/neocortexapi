@@ -12,7 +12,7 @@ using NeoCortexApiSample;
 
 namespace MultiSequencePrediction
 {
-    class Project
+    class Multisequence
     {
         private Dictionary<string, object> _encoderSettings;
         private string _trainSequencePath;
@@ -25,7 +25,7 @@ namespace MultiSequencePrediction
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
 
             //Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.
-            sequences = readSequences(_trainSequencePath);
+            sequences = ReadSequences(_trainSequencePath);
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             
@@ -36,7 +36,7 @@ namespace MultiSequencePrediction
         ///<summary>
         ///This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.
         ///</summary>
-        public Dictionary<string, List<double>> readSequences(string sequencePath)
+        public Dictionary<string, List<double>> ReadSequences(string sequencePath)
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
             var sequence = new List<double>();
@@ -75,7 +75,7 @@ namespace MultiSequencePrediction
         /// </summary>
         /// <param name="path"></param>
         /// <returns>testSequences</returns>
-        public List<List<double>> readTestSequences(string path)
+        public List<List<double>> ReadTestSequences(string path)
         {
             var testSequences = new List<List<double>>();
             var testList = new List<double>();

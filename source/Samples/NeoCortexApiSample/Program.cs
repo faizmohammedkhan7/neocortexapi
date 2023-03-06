@@ -103,10 +103,10 @@ namespace NeoCortexApiSample
 
             string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
             // Instantiating project class from MultiSequencePrediction
-            Project project = new Project();
+            Multisequence project = new Multisequence();
 
             // Code for reading the testing sequences from .txt file.
-            List<List<double>> testSequences = project.readTestSequences(testSequencePath);
+            List<List<double>> testSequences = project.ReadTestSequences(testSequencePath);
 
             // Defining the encoder settings for the experiment
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
