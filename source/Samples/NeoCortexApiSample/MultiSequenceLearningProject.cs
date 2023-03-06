@@ -23,7 +23,7 @@ namespace MultiSequencePrediction
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
 
-            /*Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.*/
+            //Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.
             sequences = readSequences(_trainSequencePath);
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
@@ -32,7 +32,9 @@ namespace MultiSequencePrediction
             return predictor;
         }
 
-        /*This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.*/
+        ///<summary>
+        ///This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.
+        ///</summary>
         public Dictionary<string, List<double>> readSequences(string sequencePath)
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
@@ -57,7 +59,11 @@ namespace MultiSequencePrediction
             }
         }
 
-        /*This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.*/
+        /// <summary>
+        /// This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>testSequences</returns>
         public List<List<double>> readTestSequences(string path)
         {
             var testSequences = new List<List<double>>();
