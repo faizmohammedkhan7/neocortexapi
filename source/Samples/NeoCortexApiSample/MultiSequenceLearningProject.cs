@@ -61,6 +61,7 @@ namespace MultiSequencePrediction
                     {
                         Console.WriteLine("Error reading file: " + e.Message);
 
+<<<<<<< HEAD
                     }
 
 
@@ -105,3 +106,11 @@ namespace MultiSequencePrediction
 
     }
 }
+=======
+                }
+                return sequences;
+            }
+        }
+    }
+}
+>>>>>>> 4241a2af884ee20d9825722b307fcf825cc9e793
