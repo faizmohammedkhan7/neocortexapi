@@ -19,7 +19,6 @@ namespace MultiSequencePrediction
         // Getters/ Setters for above instance variables.
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
-
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
