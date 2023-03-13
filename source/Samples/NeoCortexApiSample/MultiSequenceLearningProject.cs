@@ -27,7 +27,7 @@ namespace MultiSequencePrediction
             sequences = ReadSequences(_trainSequencePath);
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-            
+
             var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
@@ -55,19 +55,20 @@ namespace MultiSequencePrediction
                         string seqName = "seq" + count;
                         sequences.Add(seqName, sequence);
                         count++;
-                        
+
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine("Error reading file: " + e.Message);
-                        
+
                     }
-                    
+
 
                 }
                 return sequences;
             }
         }
+
 
         /// <summary>
         /// This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.
@@ -93,7 +94,7 @@ namespace MultiSequencePrediction
                         }
                         testSequences.Add(testList);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine("Error reading test file: " + e.Message);
                     }
@@ -102,6 +103,5 @@ namespace MultiSequencePrediction
             return testSequences;
         }
 
-        
     }
 }

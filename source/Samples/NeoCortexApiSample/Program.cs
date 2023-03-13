@@ -106,7 +106,8 @@ namespace NeoCortexApiSample
             Multisequence project = new Multisequence();
 
             // Code for reading the testing sequences from .txt file.
-            List<List<double>> testSequences = project.ReadTestSequences(testSequencePath);
+            //List<List<double>> testSequences = project.ReadTestSequences(testSequencePath);
+            Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
 
             // Defining the encoder settings for the experiment
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
@@ -128,7 +129,7 @@ namespace NeoCortexApiSample
             for (int i = 0; i< testSequences.Count; i++)
             {
                 predictor.Reset();
-                PredictNextElement(predictor, testSequences[i]);
+                PredictNextElement(predictor, testSequences.ElementAt(i).Value);
             }  
         }
 
