@@ -27,7 +27,7 @@ namespace MultiSequencePrediction
             sequences = ReadSequences(_trainSequencePath);
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-            
+
             var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
@@ -55,18 +55,55 @@ namespace MultiSequencePrediction
                         string seqName = "seq" + count;
                         sequences.Add(seqName, sequence);
                         count++;
-                        
+
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine("Error reading file: " + e.Message);
-                        
+
                     }
-                    
+
 
                 }
                 return sequences;
             }
         }
+
+
+        /// <summary>
+        /// This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>testSequences</returns>
+        public List<List<double>> ReadTestSequences(string path)
+        {
+            var testSequences = new List<List<double>>();
+            var testList = new List<double>();
+            using (var reader = new StreamReader(path))
+            {
+                while (!reader.EndOfStream)
+                {
+                    try
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',', ' ');
+
+                        foreach (var value in values)
+                        {
+                            testList.Add(Convert.ToDouble(value));
+                        }
+                        testSequences.Add(testList);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error reading test file: " + e.Message);
+                    }
+                }
+            }
+            return testSequences;
+        }
+
+
+
     }
 }
