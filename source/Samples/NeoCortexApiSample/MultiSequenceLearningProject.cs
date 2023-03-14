@@ -19,15 +19,19 @@ namespace MultiSequencePrediction
         // Getters/ Setters for above instance variables.
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
+
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
 
             //Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.
             sequences = ReadSequences(_trainSequencePath);
+            //sequences.Add("S1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
+            //sequences.Add("S2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
+            //sequences.Add("S3", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 15.0, 18.0, 17.00 }));
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-
+            
             var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
@@ -55,55 +59,18 @@ namespace MultiSequencePrediction
                         string seqName = "seq" + count;
                         sequences.Add(seqName, sequence);
                         count++;
-
+                        
                     }
-                    catch (Exception e)
+                    catch(Exception e)
                     {
                         Console.WriteLine("Error reading file: " + e.Message);
-
+                        
                     }
-
+                    
 
                 }
                 return sequences;
             }
         }
-
-
-        /// <summary>
-        /// This method is for reading the testing sequences for the model from a .txt file. The method returns a list of sequences of type List<double>.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>testSequences</returns>
-        public List<List<double>> ReadTestSequences(string path)
-        {
-            var testSequences = new List<List<double>>();
-            var testList = new List<double>();
-            using (var reader = new StreamReader(path))
-            {
-                while (!reader.EndOfStream)
-                {
-                    try
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',', ' ');
-
-                        foreach (var value in values)
-                        {
-                            testList.Add(Convert.ToDouble(value));
-                        }
-                        testSequences.Add(testList);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Error reading test file: " + e.Message);
-                    }
-                }
-            }
-            return testSequences;
-        }
-
-
-
     }
 }
