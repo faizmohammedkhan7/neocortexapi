@@ -82,14 +82,14 @@ namespace NeoCortexApiSample
             var list2 = new double[] { 2.0, 3.0, 4.0 };
             var list3 = new double[] { 8.0, 1.0, 2.0 };
 
-            /*predictor.Reset();
-            PredictNextElement(predictor, list1);
+            //predictor.Reset();
+            //PredictNextElement(predictor, list1);
 
-            predictor.Reset();
-            PredictNextElement(predictor, list2);
+            //predictor.Reset();
+            //PredictNextElement(predictor, list2);
 
-            predictor.Reset();
-            PredictNextElement(predictor, list3);*/
+            //predictor.Reset();
+            //PredictNextElement(predictor, list3);
         }
 
         /// <summary>
@@ -108,7 +108,9 @@ namespace NeoCortexApiSample
             // Code for reading the testing sequences from .txt file.
             //List<List<double>> testSequences = project.ReadTestSequences(testSequencePath);
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
-
+            //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
+            //testSequences.Add("T1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0 }));
+            //testSequences.Add("T2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0 }));
             // Defining the encoder settings for the experiment
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
             {
