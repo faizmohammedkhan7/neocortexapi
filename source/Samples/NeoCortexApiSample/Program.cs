@@ -106,7 +106,7 @@ namespace NeoCortexApiSample
             Multisequence project = new Multisequence();
 
             // Code for reading the testing sequences from .txt file.
-            //List<List<double>> testSequences = project.ReadTestSequences(testSequencePath);
+            
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
             //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
             //testSequences.Add("T1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0 }));
@@ -131,6 +131,8 @@ namespace NeoCortexApiSample
             for (int i = 0; i< testSequences.Count; i++)
             {
                 predictor.Reset();
+                Debug.WriteLine("------------------------------");
+                Debug.WriteLine($"Predicting for Sequence {testSequences.ElementAt(i).Key}");
                 PredictNextElement(predictor, testSequences.ElementAt(i).Value);
             }  
         }
@@ -148,18 +150,21 @@ namespace NeoCortexApiSample
                 {
                     foreach (var pred in res)
                     {
-                        Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity}");
+                        Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
                     }
 
                     var tokens = res.First().PredictedInput.Split('_');
                     var tokens2 = res.First().PredictedInput.Split('-');
-                    Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()}");
+                    var similiraty = res.First().Similarity;
+                    Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+
                 }
                 else
                     Debug.WriteLine("Nothing predicted :(");
             }
 
             Debug.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
         }
     }
 }
