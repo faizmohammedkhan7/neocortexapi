@@ -24,12 +24,10 @@ namespace NeoCortexApiSample
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //
             // Starts experiment that demonstrates how to learn spatial patterns.
             //SpatialPatternLearning experiment = new SpatialPatternLearning();
             //experiment.Run();
 
-            //
             // Starts experiment that demonstrates how to learn spatial patterns.
             //SequenceLearning experiment = new SequenceLearning();
             //experiment.Run();
@@ -46,7 +44,6 @@ namespace NeoCortexApiSample
             sequences.Add("S1", new List<double>(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, }));
             sequences.Add("S2", new List<double>(new double[] { 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 }));
 
-            //
             // Prototype for building the prediction engine.
             MultiSequenceLearning experiment = new MultiSequenceLearning();
             var predictor = experiment.Run(sequences);         
@@ -69,12 +66,10 @@ namespace NeoCortexApiSample
             sequences.Add("S1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
             sequences.Add("S2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
 
-            //
             // Prototype for building the prediction engine.
             MultiSequenceLearning experiment = new MultiSequenceLearning();
             var predictor = experiment.Run(sequences);
 
-            //
             // These list are used to see how the prediction works.
             // Predictor is traversing the list element by element. 
             // By providing more elements to the prediction, the predictor delivers more precise result.
@@ -98,7 +93,6 @@ namespace NeoCortexApiSample
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment()
         {
-            // string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
             string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
 
             string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
@@ -157,10 +151,10 @@ namespace NeoCortexApiSample
                         Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
                     }
 
-                    var tokens = res.First().PredictedInput.Split('_');
-                    var tokens2 = res.First().PredictedInput.Split('-');
+                    var token_first = res.First().PredictedInput.Split('_');
+                    var token_second = res.First().PredictedInput.Split('-');
                     var similiraty = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+                    Debug.WriteLine($"Predicted Sequence: {token_first[0]}, predicted next element {token_second.Last()} with Accuracy of {similiraty} %");
 
                 }
                 else
