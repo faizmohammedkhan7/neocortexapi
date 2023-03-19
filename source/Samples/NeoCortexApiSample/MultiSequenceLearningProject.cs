@@ -34,7 +34,7 @@ namespace MultiSequencePrediction
         }
 
         ///<summary>
-   
+        ///This method is for reading the training sequences for the model from a.txt file.The method returns a dictionary of sequences of type List<double>.
         ///</summary>
         public Dictionary<string, List<double>> ReadSequences(string sequencePath)
         {
