@@ -26,10 +26,7 @@ namespace MultiSequencePrediction
 
             //Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.
             sequences = ReadSequences(_trainSequencePath);
-            //sequences.Add("S1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
-            //sequences.Add("S2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
-            //sequences.Add("S3", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 15.0, 18.0, 17.00 }));
-
+           
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
             
             var predictor = newExperiment.Run(sequences, _encoderSettings);
@@ -37,7 +34,7 @@ namespace MultiSequencePrediction
         }
 
         ///<summary>
-        ///This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.
+        ///This method is for reading the training sequences for the model from a.txt file.The method returns a dictionary of sequences of type List<double>.
         ///</summary>
         public Dictionary<string, List<double>> ReadSequences(string sequencePath)
         {
