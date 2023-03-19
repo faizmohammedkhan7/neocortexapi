@@ -137,7 +137,11 @@ namespace NeoCortexApiSample
             }  
         }
 
-
+        /// <summary>
+        /// To predict the Next Element with percentage accuracy for a test sequence
+        /// </summary>
+        /// <param name="predictor">Predictor object to predict next element</param>
+        /// <param name="list">list of sequence to be predicted</param>
         private static void PredictNextElement(Predictor predictor, List<double> list)
         {
             Debug.WriteLine("------------------------------");
