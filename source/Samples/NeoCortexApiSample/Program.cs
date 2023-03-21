@@ -145,8 +145,10 @@ namespace NeoCortexApiSample
 
         private static void PredictNextElement(Predictor predictor, List<double> list)
         {
+            DateTime today = DateTime.Now;
             Debug.WriteLine("------------------------------");
-
+            string result_path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @$"..\..\..\..\..\MySEProject/result-{today}.txt"));
+            StreamWriter writer = new StreamWriter(result_path);
             foreach (var item in list)
             {
                 var res = predictor.Predict(item);
@@ -162,12 +164,12 @@ namespace NeoCortexApiSample
                     var tokens2 = res.First().PredictedInput.Split('-');
                     var similiraty = res.First().Similarity;
                     Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
-
+                    writer.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
                 }
                 else
                     Debug.WriteLine("Nothing predicted :(");
             }
-
+            writer.Close();
             Debug.WriteLine("------------------------------");
             Console.WriteLine("------------------------------");
         }
