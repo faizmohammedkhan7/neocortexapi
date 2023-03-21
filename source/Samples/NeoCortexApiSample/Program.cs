@@ -11,6 +11,7 @@ using System.Linq;
 using static NeoCortexApiSample.MultiSequenceLearning;
 using MultiSequencePrediction;
 using System.ComponentModel;
+using System.Numerics;
 
 namespace NeoCortexApiSample
 {
@@ -24,17 +25,24 @@ namespace NeoCortexApiSample
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            //
             // Starts experiment that demonstrates how to learn spatial patterns.
             //SpatialPatternLearning experiment = new SpatialPatternLearning();
             //experiment.Run();
 
+            //
             // Starts experiment that demonstrates how to learn spatial patterns.
             //SequenceLearning experiment = new SequenceLearning();
             //experiment.Run();
 
             //RunMultiSimpleSequenceLearningExperiment();
             //RunMultiSequenceLearningExperiment();
-            RunPredictionMultiSequenceExperiment();
+
+            // string path = ".//.//" + System.IO.Directory.GetCurrent‌​Directory();
+            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
+
+            string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
+            RunPredictionMultiSequenceExperiment(sequencePath, testSequencePath);
         }
 
         private static void RunMultiSimpleSequenceLearningExperiment()
@@ -44,6 +52,7 @@ namespace NeoCortexApiSample
             sequences.Add("S1", new List<double>(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, }));
             sequences.Add("S2", new List<double>(new double[] { 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 }));
 
+            //
             // Prototype for building the prediction engine.
             MultiSequenceLearning experiment = new MultiSequenceLearning();
             var predictor = experiment.Run(sequences);         
@@ -66,10 +75,12 @@ namespace NeoCortexApiSample
             sequences.Add("S1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
             sequences.Add("S2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
 
+            //
             // Prototype for building the prediction engine.
             MultiSequenceLearning experiment = new MultiSequenceLearning();
             var predictor = experiment.Run(sequences);
 
+            //
             // These list are used to see how the prediction works.
             // Predictor is traversing the list element by element. 
             // By providing more elements to the prediction, the predictor delivers more precise result.
@@ -87,24 +98,24 @@ namespace NeoCortexApiSample
             //PredictNextElement(predictor, list3);
         }
 
+        ///------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// This is the method which will contain the implementation by our team for the Project
         /// Team_Matrix
         /// </summary>
-        private static void RunPredictionMultiSequenceExperiment()
+        private static void RunPredictionMultiSequenceExperiment(string sequencePath, string testSequencePath)
         {
-            string sequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject/trainingSequences.txt"));
 
-            string testSequencePath = Path.GetFullPath(Path.Combine(Directory.GetCurrent‌​Directory(), @"..\..\..\..\..\MySEProject/testingData.txt"));
             // Instantiating project class from MultiSequencePrediction
             Multisequence project = new Multisequence();
 
-            // Code for reading the testing sequences from .txt file.
             
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
             //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
             //testSequences.Add("T1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0 }));
             //testSequences.Add("T2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0 }));
+
+
             // Defining the encoder settings for the experiment
             Dictionary<string, object> encoderSettings = new Dictionary<string, object>()
             {
@@ -115,7 +126,7 @@ namespace NeoCortexApiSample
                 { "Periodic", false},
                 { "Name", "scalar"},
                 { "ClipInput", false},
-                { "MaxVal", 99.0} //Only double value
+                { "MaxVal", 99.0} //Only double value, the code in the PredictionExperiment method automatically sets the maximum value from the sequences
             };
             project.TrainSequencePath = sequencePath;
             project.EncoderSettings = encoderSettings;
@@ -131,11 +142,7 @@ namespace NeoCortexApiSample
             }  
         }
 
-        /// <summary>
-        /// To predict the Next Element with percentage accuracy for a test sequence
-        /// </summary>
-        /// <param name="predictor">Predictor object to predict next element</param>
-        /// <param name="list">list of sequence to be predicted</param>
+
         private static void PredictNextElement(Predictor predictor, List<double> list)
         {
             Debug.WriteLine("------------------------------");
@@ -151,10 +158,10 @@ namespace NeoCortexApiSample
                         Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
                     }
 
-                    var token_first = res.First().PredictedInput.Split('_');
-                    var token_second = res.First().PredictedInput.Split('-');
+                    var tokens = res.First().PredictedInput.Split('_');
+                    var tokens2 = res.First().PredictedInput.Split('-');
                     var similiraty = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {token_first[0]}, predicted next element {token_second.Last()} with Accuracy of {similiraty} %");
+                    Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
 
                 }
                 else
