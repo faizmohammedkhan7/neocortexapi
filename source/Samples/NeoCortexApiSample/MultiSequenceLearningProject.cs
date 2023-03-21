@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using NeoCortexApi;
@@ -12,10 +15,11 @@ using NeoCortexApiSample;
 
 namespace MultiSequencePrediction
 {
-    class Multisequence
+    public class Multisequence
     {
         private Dictionary<string, object> _encoderSettings;
         private string _trainSequencePath;
+        public double encoder_max;
         // Getters/ Setters for above instance variables.
         public Dictionary<string, object> EncoderSettings { get { return _encoderSettings; } set { _encoderSettings = value; } }
         public string TrainSequencePath { get { return _trainSequencePath; } set { _trainSequencePath = value; } }
@@ -23,21 +27,20 @@ namespace MultiSequencePrediction
         public Predictor PredictionExperiment()
         {
             Dictionary<string, List<double>> sequences = new Dictionary<string, List<double>>();
-
+            
             //Code for reading the learning sequences from .txt file. The file has n rows which have numbers seperated by commas.
             sequences = ReadSequences(_trainSequencePath);
-            //sequences.Add("S1",new List<double>(new double[] {0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0}));
-            //sequences.Add("S2",new List<double>(new double[] {8.0, 1.0, 2.0, 8.0, 11.0, 7.0, 16.0}));
-            //sequences.Add("S3",new List<double>(new double[] {8.0, 1.0, 2.0, 9.0, 15.0, 12.0, 9.0})); 
+            //sequences.Add("S1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
+            //sequences.Add("S2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
 
             MultiSequenceLearning newExperiment = new MultiSequenceLearning();
-            
+            _encoderSettings["MaxVal"]= sequences.Values.SelectMany(list => list).Max(); //sets the max value based on the max value from the sequences
             var predictor = newExperiment.Run(sequences, _encoderSettings);
             return predictor;
         }
 
         ///<summary>
-        ///This method is for reading the training sequences for the model from a.txt file.The method returns a dictionary of sequences of type List<double>.
+        ///This method is for reading the training sequences for the model from a .txt file. The method returns a dictionary of sequences of type List<double>.
         ///</summary>
         public Dictionary<string, List<double>> ReadSequences(string sequencePath)
         {
@@ -65,7 +68,8 @@ namespace MultiSequencePrediction
                     {
                         Console.WriteLine("Error reading file: " + e.Message);
                         
-                    }  
+                    }
+                    
 
                 }
                 return sequences;
