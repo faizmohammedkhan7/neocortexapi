@@ -43,12 +43,19 @@ The sequences are automatically assigned a key/name.
                         count++;  
                     }
 ```
+ Sample sequences
+ ```csharp
+            sequences.Add("Seq1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 2.0, 5.0 }));
+            sequences.Add("Seq2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0, 10.0, 7.0, 11.00 }));
+```
 
 The Other function is **PredictionExperiment** which returns an object of type Predictor. This is the trained data after running multiple cycles. The function calls the Run method from the [MultiSequenceLearning](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/blob/Team_Matrix/source/Samples/NeoCortexApiSample/MultisequenceLearning.cs) class which was implemented earlier and passes in the sequences and the encoder settings.
 ```csharp
              var predictor = newExperiment.Run(sequences, _encoderSettings);
 ```
-
+ Once the prediction is done and the method returns a Predictor Object. This object along with a test sequence is passed to the **PredictNextElement** method in [Program.cs](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/blob/Team_Matrix/source/Samples/NeoCortexApiSample/Program.cs) where it iterates over each element in the test sequence and passes it in the **Predict** method of the [Predictor](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/blob/Team_Matrix/source/NeoCortexApi/Predictor.cs) class.
+ It then predicts the next element based on the training sequences provided to it earlier and returns the sequence where it matches along with its accuracy. This data is then written to a result file at the location Here: neocortexapi/tree/Team_Matrix/source/MySEProject.
+The result file is named based on the current timestamp.
 Tasks to be done by each team member  -->
                                         To analyze existing code in MultisequenceLearning.cs & the method RunMultiSequenceLearningExperiment.
                                         To learn how sequence learning and prediction works.
