@@ -112,9 +112,6 @@ namespace NeoCortexApiSample
 
             
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
-            //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
-            //testSequences.Add("T1", new List<double>(new double[] { 1.0, 3.0, 10.0, 8.0 }));
-            //testSequences.Add("T2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0 }));
 
 
             // Defining the encoder settings for the experiment
