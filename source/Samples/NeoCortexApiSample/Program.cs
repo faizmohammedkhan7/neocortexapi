@@ -100,7 +100,8 @@ namespace NeoCortexApiSample
 
         ///------------------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// This is the method which will contain the implementation by our team for the Project
+        /// This is the method which will contain the implementation by our team for the Project. It takes the paths for sequences to be trained and
+        /// sequences to be tested as arguements.
         /// Team_Matrix
         /// </summary>
         private static void RunPredictionMultiSequenceExperiment(string sequencePath, string testSequencePath)
@@ -112,7 +113,7 @@ namespace NeoCortexApiSample
             
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
             //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
-            //testSequences.Add("T1", new List<double>(new double[] { 0.0, 1.0, 2.0, 3.0 }));
+            //testSequences.Add("T1", new List<double>(new double[] { 1.0, 3.0, 10.0, 8.0 }));
             //testSequences.Add("T2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0 }));
 
 
@@ -145,10 +146,12 @@ namespace NeoCortexApiSample
 
         private static void PredictNextElement(Predictor predictor, List<double> list)
         {
-            DateTime today = DateTime.Now;
             Debug.WriteLine("------------------------------");
-            string result_path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @$"..\..\..\..\..\MySEProject/result-{today}.txt"));
+            DateTime now = DateTime.Now;
+            string filename = $"result-{now.ToString("yyyy-MM-dd_HH-mm-ss-fff")}.txt";
+            string result_path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject\", filename);
             StreamWriter writer = new StreamWriter(result_path);
+
             foreach (var item in list)
             {
                 var res = predictor.Predict(item);
@@ -158,13 +161,19 @@ namespace NeoCortexApiSample
                     foreach (var pred in res)
                     {
                         Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
+                        var sequence_name = pred.PredictedInput.Split('_');
+                        var sequence_nums = pred.PredictedInput.Split('-');
+                        var accuracy = pred.Similarity;
+                        
+                        //writer.WriteLine($"Predicted Sequence: {sequence_name[0]}, predicted next element {sequence_nums.Last()} with Accuracy of {accuracy} %");
                     }
 
-                    var tokens = res.First().PredictedInput.Split('_');
+                    var tokens = res.First().PredictedInput;
                     var tokens2 = res.First().PredictedInput.Split('-');
                     var similiraty = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
-                    writer.WriteLine($"Predicted Sequence: {tokens[0]}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+
                 }
                 else
                     Debug.WriteLine("Nothing predicted :(");
