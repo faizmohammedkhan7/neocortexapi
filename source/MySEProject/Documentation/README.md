@@ -56,32 +56,16 @@ The Other function is **PredictionExperiment** which returns an object of type P
  Once the prediction is done and the method returns a Predictor Object. This object along with a test sequence is passed to the **PredictNextElement** method in [Program.cs](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/blob/Team_Matrix/source/Samples/NeoCortexApiSample/Program.cs) where it iterates over each element in the test sequence and passes it in the **Predict** method of the [Predictor](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/blob/Team_Matrix/source/NeoCortexApi/Predictor.cs) class.
  It then predicts the next element based on the training sequences provided to it earlier and returns the sequence where it matches along with its accuracy. This data is then written to a result file at the location Here: neocortexapi/tree/Team_Matrix/source/MySEProject.
 The result file is named based on the current timestamp.
-Tasks to be done by each team member  -->
-                                        To analyze existing code in MultisequenceLearning.cs & the method RunMultiSequenceLearningExperiment.
-                                        To learn how sequence learning and prediction works.
-                                        Play around with the ML.NET library and get familiar.
+```csharp
+            DateTime now = DateTime.Now;
+            string filename = $"result-{now.ToString("yyyy-MM-dd_HH-mm-ss-fff")}.txt";
+            string result_path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject\", filename);
+            StreamWriter writer = new StreamWriter(result_path);
+            writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
+            writer.Close();
+```
 
-Added new method for testing sequence : RunMultiSequenceLearningExperiment()
 
-21.01.23: Analyzed the Run() method and RunExperiment() method in MultisequenceLearning.cs file. Next step would be test them with string sequences.
-
-//Implemented Code for reading the learning sequences and testing sequences from .txt file the code is implemented in RunPredictionMultiSequenceExperiment() method.
-
-* And the Sequences are in source\MySEProject as trainingSequences.txt & testingData.txt
-
-**RunPredictionMultiSequenceExperiment() method is called from the program.cs.
-
-The method has an instantiated object project of type Project which is a class implemented in MultiSequencePrediction.
-
-**The methods for reading test sequences and learning sequences are defined in MultiSequenceLearningProject.cs in the Project class.
-
-The PredictionExperiment() method calls the Run() method from the MultiSequenceLearning class.
-
-The Run() method takes in seqences and the encoderSettings as arguements.
-
-** Executed few lines of code which helps to run the program successfully.
-
-** Started Preparing Power Point Presentation , Prepared Few Slides.
 
 
                                         
