@@ -112,9 +112,6 @@ namespace NeoCortexApiSample
 
             
             Dictionary<string, List<double>> testSequences = project.ReadSequences(testSequencePath);
-            //Dictionary<string, List<double>> testSequences = new Dictionary<string, List<double>>();
-            //testSequences.Add("T1", new List<double>(new double[] { 1.0, 3.0, 10.0, 8.0 }));
-            //testSequences.Add("T2", new List<double>(new double[] { 8.0, 1.0, 2.0, 9.0 }));
 
 
             // Defining the encoder settings for the experiment
@@ -161,18 +158,13 @@ namespace NeoCortexApiSample
                     foreach (var pred in res)
                     {
                         Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
-                        var sequence_name = pred.PredictedInput.Split('_');
-                        var sequence_nums = pred.PredictedInput.Split('-');
-                        var accuracy = pred.Similarity;
-                        
-                        //writer.WriteLine($"Predicted Sequence: {sequence_name[0]}, predicted next element {sequence_nums.Last()} with Accuracy of {accuracy} %");
                     }
 
                     var tokens = res.First().PredictedInput;
                     var tokens2 = res.First().PredictedInput.Split('-');
-                    var similiraty = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
-                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+                    var accuracy = res.First().Similarity;
+                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
+                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
 
                 }
                 else
