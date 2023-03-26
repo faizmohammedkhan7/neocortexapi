@@ -161,18 +161,13 @@ namespace NeoCortexApiSample
                     foreach (var pred in res)
                     {
                         Debug.WriteLine($"{pred.PredictedInput} - {pred.Similarity} %");
-                        var sequence_name = pred.PredictedInput.Split('_');
-                        var sequence_nums = pred.PredictedInput.Split('-');
-                        var accuracy = pred.Similarity;
-                        
-                        //writer.WriteLine($"Predicted Sequence: {sequence_name[0]}, predicted next element {sequence_nums.Last()} with Accuracy of {accuracy} %");
                     }
 
                     var tokens = res.First().PredictedInput;
                     var tokens2 = res.First().PredictedInput.Split('-');
-                    var similiraty = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
-                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {similiraty} %");
+                    var accuracy = res.First().Similarity;
+                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
+                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
 
                 }
                 else
