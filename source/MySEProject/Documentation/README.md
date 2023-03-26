@@ -2,22 +2,21 @@
 ### Software Engineering WiSe 22/23 Project
 
 #### Team Name: Team_Matrix
-###### Team Members: 
-######            *  Faiz Mohammed Khan
-######            *  Shiva Kumar Biru
-######            *  Mohan Sai Ram Sarnala
+**Team Members:**
+- Faiz Mohammed Khan (faiz.khan@stud.fra-uas.de)
+- Shiva Kumar Biru (shiva.biru@stud.fra-uas.de)
+- Mohan Sai Ram Sarnala (mohan.sarnala@stud.fra-uas.de)
 
-### Project Description
+
+**Project Description**
 =============
 
-1. Objective
+1.Objective
 -------------
-Multisequence Learning is the process of learning many sequences like:
-1784, 4788, 9037, …
-
-This can be used in industrial solutions to solve many problems. For example, the sequence ABCDDEE can be an array of music notes, and HTM can be used to recognize songs. 
-For example being able to predict the next element of the sequence.
-
+- To Demonstrate the learning of sequences and predicting the next element of a sample sequence.
+- To Read the sequences from a file and generate the result file at the end of prediction.
+- To automate the encoder settings based on the largest value of the sequences.
+For Example reading sequences like 5,6,1,3,1.... etc from a .txt file and when given a sequence like 5,6,1 as an input should predict the next element as 3.
 -------------
 Tasks to be done by each team member  -->
                                         To analyze existing code in MultisequenceLearning.cs & the method RunMultiSequenceLearningExperiment.
