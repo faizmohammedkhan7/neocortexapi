@@ -165,6 +165,7 @@ namespace NeoCortexApiSample
                     var accuracy = res.First().Similarity;
                     Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
                     writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
+                    writer.WriteLine("--------------------------------------");
 
                 }
                 else
