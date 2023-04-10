@@ -3,10 +3,6 @@
 
 #### Team Name: Team_Matrix
 ### [Team Repository](https://github.com/faizmohammedkhan7/neocortexapi_Team_Matrix/tree/Team_Matrix/source/MySEProject)
-**Team Members:**
-- Faiz Mohammed Khan (faiz.khan@stud.fra-uas.de)
-- Shiva Kumar Biru (shiva.biru@stud.fra-uas.de)
-- Mohan Sai Ram Sarnala (mohan.sarnala@stud.fra-uas.de)
 
 
 **Project Description**
