@@ -12,6 +12,7 @@ using static NeoCortexApiSample.MultiSequenceLearning;
 using MultiSequencePrediction;
 using System.ComponentModel;
 using System.Numerics;
+using Newtonsoft.Json.Linq;
 
 namespace NeoCortexApiSample
 {
@@ -148,7 +149,8 @@ namespace NeoCortexApiSample
             string filename = $"result-{now.ToString("yyyy-MM-dd_HH-mm-ss-fff")}.txt";
             string result_path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\..\MySEProject\", filename);
             StreamWriter writer = new StreamWriter(result_path);
-
+            int matchCount = 0;
+            int totalCount = 0;
             foreach (var item in list)
             {
                 var res = predictor.Predict(item);
@@ -162,15 +164,19 @@ namespace NeoCortexApiSample
 
                     var tokens = res.First().PredictedInput;
                     var tokens2 = res.First().PredictedInput.Split('-');
-                    var accuracy = res.First().Similarity;
-                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
-                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
+                    var similarity = res.First().Similarity;
+                    Debug.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with similarity of {similarity} %");
+                    writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with similarity of {similarity} %");
                     writer.WriteLine("--------------------------------------");
+                    matchCount += 1;
 
                 }
                 else
                     Debug.WriteLine("Nothing predicted :(");
+                totalCount += 1;
             }
+            var accuracy = (matchCount*100) / totalCount;
+            writer.WriteLine($"Predicted Sequence with accuracy of {accuracy} %");
             writer.Close();
             Debug.WriteLine("------------------------------");
             Console.WriteLine("------------------------------");
