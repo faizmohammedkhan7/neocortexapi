@@ -81,6 +81,12 @@ The **PredictNextElement** method has the following changes:
             writer.WriteLine($"Predicted Sequence: {tokens}, predicted next element {tokens2.Last()} with Accuracy of {accuracy} %");
             writer.Close();
 ```
+
+```csharp
+             var accuracy = (matchCount*100) / totalCount;
+            writer.WriteLine($"Predicted Sequence with accuracy of {accuracy} %");
+```
+
 Sample Result:
 ![image](https://user-images.githubusercontent.com/59792795/227899965-bb71ba6b-fda1-4627-a9bf-acb5adb2af30.png)
 ![image](https://user-images.githubusercontent.com/59792795/227914196-95c55a83-4abc-4e62-81d5-65643f26fd34.png)
