@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Encodings.Web;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace NeoCortexApiSample
@@ -20,9 +22,8 @@ namespace NeoCortexApiSample
         /// Runs the learning of sequences.
         /// </summary>
         /// <param name="sequences">Dictionary of sequences. KEY is the sewuence name, the VALUE is th elist of element of the sequence.</param>
-        public Predictor Run(Dictionary<string, List<double>> sequences)
+        public Predictor Run(Dictionary<string, List<double>> sequences, Dictionary<string, object> encoderSettings = null)
         {
-            Console.WriteLine($"Hello NeocortexApi! Experiment {nameof(MultiSequenceLearning)}");
 
             int inputBits = 100;
             int numColumns = 1024;
@@ -56,7 +57,9 @@ namespace NeoCortexApiSample
 
             double max = 20;
 
-            Dictionary<string, object> settings = new Dictionary<string, object>()
+            if (encoderSettings == null)
+            {
+                encoderSettings = new Dictionary<string, object>()
             {
                 { "W", 15},
                 { "N", inputBits},
@@ -67,8 +70,9 @@ namespace NeoCortexApiSample
                 { "ClipInput", false},
                 { "MaxVal", max}
             };
+            }
 
-            EncoderBase encoder = new ScalarEncoder(settings);
+            EncoderBase encoder = new ScalarEncoder(encoderSettings);
 
             return RunExperiment(inputBits, cfg, encoder, sequences);
         }
@@ -242,7 +246,7 @@ namespace NeoCortexApiSample
                             Debug.WriteLine($"Match. Actual value: {key} - Predicted value: {lastPredictedValues.FirstOrDefault(key)}.");
                         }
                         else
-                            Debug.WriteLine($"Missmatch! Actual value: {key} - Predicted values: {String.Join(',', lastPredictedValues)}");
+                            Debug.WriteLine($"Missmatch! Actual value: {key} - Predicted values: {string.Join(',', lastPredictedValues)}");
 
                         if (lyrOut.PredictiveCells.Count > 0)
                         {
@@ -331,7 +335,7 @@ namespace NeoCortexApiSample
         /// <returns></returns>
         private static string GetKey(List<string> prevInputs, double input, string sequence)
         {
-            string key = String.Empty;
+            string key = string.Empty;
 
             for (int i = 0; i < prevInputs.Count; i++)
             {
